@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:learning/app_colors.dart';
+import 'package:learning/app_url.dart';
 import 'package:learning/menu/navigation_menu.dart';
 import 'package:learning/screens/category_screen.dart';
 import 'package:learning/screens/contact_screen.dart';
@@ -12,6 +13,7 @@ import 'package:learning/screens/popular_items.dart';
 import 'package:learning/screens/product_screen.dart';
 import 'package:learning/screens/setting_screen.dart';
 import 'package:learning/screens/top_news.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class AppDashboard extends StatefulWidget {
   const AppDashboard({super.key});
@@ -21,7 +23,20 @@ class AppDashboard extends StatefulWidget {
 }
 
 class _AppDashboardState extends State<AppDashboard> {
+  String? _fullname;
+  String? _image ="${AppUrl.url}images/default.png";
+  Future<void> _loadUserInfo() async{
+    final sp = await SharedPreferences.getInstance();
+    setState(() {
+      _fullname = sp.getString("USER_FULLNAME") ?? 'Guest';
+      _image = sp.getString("USER_IMAGE") ?? 'default.png';
+    });
+  }
   @override
+  void initState(){
+    super.initState();
+    _loadUserInfo();
+  }
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -126,8 +141,8 @@ class _AppDashboardState extends State<AppDashboard> {
                         ),
                         Container(
                           margin: const EdgeInsets.fromLTRB(10, 35, 10, 10),
-                          child: const Text(
-                            'BMC 106',
+                          child:  Text(
+                            _fullname ?? 'Guest',
                             style: TextStyle(
                               fontSize: 16,
                             ),
@@ -197,8 +212,8 @@ class _AppDashboardState extends State<AppDashboard> {
                             child: Padding(
                               padding: const EdgeInsets.all(3.0),
                               child: ClipOval(
-                                child: Image.asset(
-                                  'assets/images/userimg.png',
+                                child: Image.network(
+                                  "${AppUrl.url}/images/$_image",
                                   fit: BoxFit.cover,
                                 ),
                               ),

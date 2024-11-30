@@ -6,6 +6,7 @@ import 'package:learning/app_url.dart';
 import 'package:learning/screens/app_dashboard.dart';
 import 'package:learning/screens/signup_screen.dart';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginUser extends StatefulWidget {
   const LoginUser({super.key});
@@ -41,7 +42,17 @@ class _LoginUserState extends State<LoginUser> {
 
     if (response.statusCode == 200) {
       final data = jsonDecode(response.body);
+
       if (data['success'] == 1) {
+        final sp = await SharedPreferences.getInstance();
+        sp.setInt("USER_ID", int.parse("${data['userID']}"));
+        sp.setString('USER_NAME', "${data['userName']}");
+        sp.setString('USER_PWD', "${data['userPassword']}");
+        sp.setString('USER_TYPE', "${data['userType']}");
+        sp.setString('USER_IMAGE', "${data['userImage']}");
+        sp.setString('USER_EMAIL', "${data['userEmail']}");
+        sp.setString('USER_FULLNAME', "${data['userFullName']}");
+        sp.setString('USER_PHONE', "${data['userPhone']}");
         EasyLoading.showSuccess("${data['msg_success']}");
         if (!mounted) return;
         Navigator.pushAndRemoveUntil(
@@ -95,6 +106,7 @@ class _LoginUserState extends State<LoginUser> {
                     prefixIcon: Icon(
                       Icons.person_outline,
                       size: 32,
+                      color: AppColors.blue,
                     ),
                   ),
                 ),
@@ -116,6 +128,8 @@ class _LoginUserState extends State<LoginUser> {
                       prefixIcon: const Icon(
                         Icons.lock_outlined,
                         size: 32,
+                        color: AppColors.blue,
+
                       ),
                       suffixIcon: Padding(
                         padding: const EdgeInsets.fromLTRB(10, 0, 4, 0),
@@ -126,6 +140,8 @@ class _LoginUserState extends State<LoginUser> {
                                 ? Icons.visibility_outlined
                                 : Icons.visibility_off_outlined,
                             size: 32,
+                            color: AppColors.blue,
+
                           ),
                         ),
                       )),
@@ -151,7 +167,7 @@ class _LoginUserState extends State<LoginUser> {
                   },
                   child: const Text(
                     'Login',
-                    style: TextStyle(color: Colors.white),
+                    style: TextStyle(color: Colors.white,fontSize: 18),
                   ),
                 ),
               ),

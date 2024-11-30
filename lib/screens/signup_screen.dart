@@ -81,7 +81,7 @@ class _SignupScreenState extends State<SignupScreen> {
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('Sign Up User'),
+          title: const Text('Register Account'),
         ),
         body: Form(
           key: _formKey, // Use the Form widget
@@ -104,8 +104,10 @@ class _SignupScreenState extends State<SignupScreen> {
                     border: OutlineInputBorder(),
                     labelText: 'Full Name',
                     prefixIcon: Icon(
-                      Icons.person,
+                      Icons.person_outline,
                       size: 32,
+                      color: AppColors.blue,
+
                     ),
                   ),
                   validator: (value) {
@@ -124,8 +126,10 @@ class _SignupScreenState extends State<SignupScreen> {
                     border: OutlineInputBorder(),
                     labelText: 'UserName',
                     prefixIcon: Icon(
-                      Icons.person,
+                      Icons.person_outline,
                       size: 32,
+                      color: AppColors.blue,
+
                     ),
                   ),
                   validator: (value) {
@@ -147,6 +151,8 @@ class _SignupScreenState extends State<SignupScreen> {
                     prefixIcon: const Icon(
                       Icons.lock_outline,
                       size: 32,
+                      color: AppColors.blue,
+
                     ),
                     suffixIcon: Padding(
                       padding: const EdgeInsets.fromLTRB(10, 0, 5, 0),
@@ -157,6 +163,8 @@ class _SignupScreenState extends State<SignupScreen> {
                               ? Icons.visibility_outlined
                               : Icons.visibility_off_outlined,
                           size: 32,
+                          color: AppColors.blue,
+
                         ),
                       ),
                     ),
@@ -180,6 +188,8 @@ class _SignupScreenState extends State<SignupScreen> {
                     prefixIcon: const Icon(
                       Icons.lock_outline,
                       size: 32,
+                      color: AppColors.blue,
+
                     ),
                     suffixIcon: Padding(
                       padding: const EdgeInsets.fromLTRB(10, 0, 5, 0),
@@ -190,6 +200,8 @@ class _SignupScreenState extends State<SignupScreen> {
                               ? Icons.visibility_outlined
                               : Icons.visibility_off_outlined,
                           size: 30,
+                          color: AppColors.blue,
+
                         ),
                       ),
                     ),
@@ -225,8 +237,8 @@ class _SignupScreenState extends State<SignupScreen> {
                     }
                   },
                   child: const Text(
-                    'OK',
-                    style: TextStyle(color: Colors.white),
+                    'Register',
+                    style: TextStyle(color: Colors.white,fontSize: 20),
                   ),
                 ),
               ),
