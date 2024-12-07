@@ -24,19 +24,21 @@ class AppDashboard extends StatefulWidget {
 
 class _AppDashboardState extends State<AppDashboard> {
   String? _fullname;
-  String? _image ="${AppUrl.url}images/default.png";
+  String? _image ='${AppUrl.url}images/default.png';
   Future<void> _loadUserInfo() async{
     final sp = await SharedPreferences.getInstance();
     setState(() {
       _fullname = sp.getString("USER_FULLNAME") ?? 'Guest';
-      _image = sp.getString("USER_IMAGE") ?? 'default.png';
+      _image = sp.getString("USER_Avatar")!;
+
     });
   }
   @override
-  void initState(){
+  void initState() {
     super.initState();
     _loadUserInfo();
   }
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -213,7 +215,7 @@ class _AppDashboardState extends State<AppDashboard> {
                               padding: const EdgeInsets.all(3.0),
                               child: ClipOval(
                                 child: Image.network(
-                                  "${AppUrl.url}/images/$_image",
+                                  '${AppUrl.url}images/$_image',
                                   fit: BoxFit.cover,
                                 ),
                               ),

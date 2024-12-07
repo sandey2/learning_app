@@ -49,10 +49,11 @@ class _LoginUserState extends State<LoginUser> {
         sp.setString('USER_NAME', "${data['userName']}");
         sp.setString('USER_PWD', "${data['userPassword']}");
         sp.setString('USER_TYPE', "${data['userType']}");
-        sp.setString('USER_IMAGE', "${data['userImage']}");
+        sp.setString('USER_Avatar', "${data['userAvatar']}");
         sp.setString('USER_EMAIL', "${data['userEmail']}");
         sp.setString('USER_FULLNAME', "${data['userFullName']}");
         sp.setString('USER_PHONE', "${data['userPhone']}");
+        sp.setBool("IS_LOGGEDIN",true);
         EasyLoading.showSuccess("${data['msg_success']}");
         if (!mounted) return;
         Navigator.pushAndRemoveUntil(

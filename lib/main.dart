@@ -2,14 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:learning/app_colors.dart';
+import 'package:learning/screens/app_dashboard.dart';
 import 'package:learning/screens/login_user.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-void main() {
-  // Configure EasyLoading before running the app
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  final sp = await SharedPreferences.getInstance();
+  final checkisLoggedIn = sp.getBool("IS_LOGGEDIN") ?? false;
   configLoading();
 
   // Run the Flutter app
-  runApp(const HomeApp());
+  runApp(HomeApp(isLoggedIn: checkisLoggedIn));
 }
 
 // EasyLoading Configuration
@@ -30,14 +34,16 @@ void configLoading() {
 
 // Main App Widget
 class HomeApp extends StatelessWidget {
-  const HomeApp({super.key});
+  final bool isLoggedIn;
+  const HomeApp({super.key,required this.isLoggedIn});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Login User',
-      home: const LoginUser(),
+      //varname = (condition) ? result_if_true : result_if_false
+      home: isLoggedIn ? const AppDashboard() : const LoginUser(),
       builder: EasyLoading.init(), // Integrate EasyLoading
       theme: ThemeData.light().copyWith(
         appBarTheme: const AppBarTheme(
