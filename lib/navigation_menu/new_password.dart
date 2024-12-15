@@ -207,7 +207,7 @@ class _NewPasswordState extends State<NewPassword> {
                   },
                   child: const Text(
                     'Save',
-                    style: TextStyle(color: AppColors.icons_color),
+                    style: TextStyle(color: AppColors.white),
                   ),
                 ),
               ),

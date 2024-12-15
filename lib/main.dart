@@ -26,7 +26,7 @@ void configLoading() {
     ..maskColor = Colors.black.withOpacity(0.5)
     ..progressColor = Colors.white
     ..backgroundColor = AppColors.blue
-    ..indicatorColor = AppColors.bgmain
+    ..indicatorColor = AppColors.bgMain
     ..textColor = Colors.white
     ..userInteractions = true // Prevent user interaction while loading
     ..dismissOnTap = false;

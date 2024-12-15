@@ -106,7 +106,7 @@ class _EditUsernameState extends State<EditUsername> {
                   },
                   child: const Text(
                     'Save',
-                    style: TextStyle(color: AppColors.icons_color),
+                    style: TextStyle(color: AppColors.white),
                   ),
                 ),
               ),

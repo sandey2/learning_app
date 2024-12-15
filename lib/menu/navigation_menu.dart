@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:learning/app_colors.dart';
 import 'package:learning/app_url.dart';
 import 'package:learning/menu/about_us.dart';
-import 'package:learning/navigation_menu/my_profile.dart';
-import 'package:learning/navigation_menu/new_password.dart';
+import 'package:learning/menu/userProfile.dart';
 import 'package:learning/navigation_menu/current_password.dart';
+import 'package:learning/screens/login_user.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class NavigationMenu extends StatefulWidget {
@@ -27,20 +27,14 @@ class _NavigationMenuState extends State<NavigationMenu> {
       _image = sp.getString("USER_Avatar")!;
     });
   }
-  Future<void> _logout() async {
-    final sp = await SharedPreferences.getInstance();
-    // Clear the stored user data
-    await sp.remove("USER_FULLNAME");
-    await sp.clear();
-    Navigator.pushReplacementNamed(context, '/login'); // Adjust the route name as needed
-  }
+
   @override
   void initState() {
     super.initState();
     _loadUserData();
   }
-  @override
 
+  @override
   Widget build(BuildContext context) {
     return Drawer(
       child: ListView(
@@ -50,14 +44,24 @@ class _NavigationMenuState extends State<NavigationMenu> {
             accountName: Text('$_fullname'),
             accountEmail: Text('$_email'),
             currentAccountPicture: CircleAvatar(
-              child: ClipOval(
-                child: Image.network('${AppUrl.url}images/$_image'),
+              child: CircleAvatar(
+                radius: 40,
+                backgroundColor: AppColors.blue,
+                child: ClipOval(
+                  child: AspectRatio(
+                    aspectRatio: 1,
+                    child: Image.network(
+                      '${AppUrl.url}images/$_image',
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                ),
               ),
             ),
             decoration: const BoxDecoration(color: AppColors.blue),
           ),
           ListTile(
-            leading: const Icon(Icons.account_circle),
+            leading: Icon(Icons.account_circle, color: AppColors.blue),
             title: const Text('About Us'),
             onTap: () {
               Navigator.pop(context);
@@ -70,46 +74,46 @@ class _NavigationMenuState extends State<NavigationMenu> {
             },
           ),
           ListTile(
-            leading: const Icon(Icons.phone_in_talk),
+            leading: Icon(Icons.phone_in_talk, color: AppColors.blue),
             title: const Text('Contact Us'),
             onTap: () {},
           ),
           const Divider(),
           ListTile(
-            leading: const Icon(Icons.notifications),
+            leading: Icon(Icons.notifications, color: AppColors.blue),
             title: const Text('Promotions'),
             onTap: () {},
           ),
           ListTile(
-            leading: const Icon(Icons.question_mark),
+            leading: Icon(Icons.question_mark, color: AppColors.blue),
             title: const Text('FAQs'),
             onTap: () {},
           ),
           ListTile(
-            leading: const Icon(Icons.message),
+            leading: Icon(Icons.message, color: AppColors.blue),
             title: const Text('Feedback'),
             onTap: () {},
           ),
           ListTile(
-            leading: const Icon(Icons.list_alt_rounded),
+            leading: Icon(Icons.list_alt_rounded, color: AppColors.blue),
             title: const Text('Terms of Use'),
             onTap: () {},
           ),
           const Divider(),
           ListTile(
-            leading: const Icon(Icons.person),
+            leading: Icon(Icons.person, color: AppColors.blue),
             title: const Text('My Profile'),
             onTap: () {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => const MyProfile(),
+                  builder: (context) => const UserProfile(),
                 ),
               );
             },
           ),
           ListTile(
-            leading: const Icon(Icons.password),
+            leading: Icon(Icons.password, color: AppColors.blue),
             title: const Text('Change Password'),
             onTap: () {
               Navigator.push(
@@ -121,10 +125,15 @@ class _NavigationMenuState extends State<NavigationMenu> {
             },
           ),
           ListTile(
-            leading: const Icon(Icons.logout),
+            leading: Icon(Icons.logout, color: AppColors.blue),
             title: const Text('Logout'),
             onTap: () {
-              _logout();  // Call the _logout method here
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => LoginUser(),
+                ),
+              );
             },
           ),
         ],

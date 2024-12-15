@@ -107,7 +107,7 @@ class _AppDashboardState extends State<AppDashboard> {
       ),
       drawer: const NavigationMenu(),
       body: Container(
-        color: AppColors.bgmain,
+        color: AppColors.bgMain,
         child: Stack(
           children: <Widget>[
             // background
@@ -181,11 +181,16 @@ class _AppDashboardState extends State<AppDashboard> {
                               const SizedBox(width: 10),
                               OutlinedButton(
                                 style: OutlinedButton.styleFrom(
-                                    shape: const RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.all(
-                                    Radius.circular(5.0),
+                                  shape: const RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.all(
+                                      Radius.circular(5.0),
+                                    ),
                                   ),
-                                )),
+                                  side: BorderSide(
+                                    color: AppColors.blue, // Set the border color
+                                    width: 1.0, // Set the border width (optional)
+                                  ),
+                                ),
                                 onPressed: () {
                                   Navigator.push(
                                     context,
@@ -211,9 +216,9 @@ class _AppDashboardState extends State<AppDashboard> {
                           child: CircleAvatar(
                             radius: 40,
                             backgroundColor: AppColors.blue,
-                            child: Padding(
-                              padding: const EdgeInsets.all(3.0),
-                              child: ClipOval(
+                            child: ClipOval(
+                              child: AspectRatio(
+                                aspectRatio: 1,
                                 child: Image.network(
                                   '${AppUrl.url}images/$_image',
                                   fit: BoxFit.cover,

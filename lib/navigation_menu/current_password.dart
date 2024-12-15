@@ -153,7 +153,7 @@ class _CurrentPasswordState extends State<CurrentPassword> {
                   },
                   child: const Text(
                     'Continue',
-                    style: TextStyle(color: AppColors.icons_color),
+                    style: TextStyle(color: AppColors.white),
                   ),
                 ),
               ),

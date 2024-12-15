@@ -109,7 +109,7 @@ class _EditPhoneState extends State<EditPhone> {
                   },
                   child: const Text(
                     'Save',
-                    style: TextStyle(color: AppColors.icons_color),
+                    style: TextStyle(color: AppColors.white),
                   ),
                 ),
               ),
